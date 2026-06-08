@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Career Mapping</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#fafaf8;--bg2:#f3f1eb;--bg3:#eae8e0;
+--surface:#ffffff;--border:#e0ddd4;--border2:#ccc9be;
+--text:#1a1916;--text2:#5a5750;--text3:#9a9890;
+--d:#1a5cf5;--d-bg:#eff4ff;--d-bd:#c3d4fd;
+--co:#0f9d6a;--co-bg:#edfaf4;--co-bd:#b3e8d2;
+--br:#b83025;--br-bg:#fef0ee;--br-bd:#f9c0b9;
+--da:#7c3aed;--da-bg:#f3eeff;--da-bd:#d4bbfd;
+--pr2:#c27213;--pr2-bg:#fdf5e6;--pr2-bd:#f5d899;
+--ag:#1a8a9d;--ag-bg:#eaf8fb;--ag-bd:#a9dfe8;
+--pr:#b5470c;--pr-bg:#fef3ec;--pr-bd:#f9c99b;
+--ex:#374151;--ex-bg:#f4f4f2;--ex-bd:#d1d0ca;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* HEADER */
+.hdr{background:var(--text);color:#fff;padding:56px 48px 44px;position:relative;overflow:hidden}
+.hdr::before{content:'MARKETING';position:absolute;right:-10px;top:-8px;font-family:'DM Serif Display',serif;font-size:170px;color:rgba(255,255,255,.04);pointer-events:none;white-space:nowrap;line-height:1;user-select:none}
+.hdr-eye{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px}
+.hdr-title{font-family:'DM Serif Display',serif;font-size:clamp(30px,5vw,50px);font-weight:400;line-height:1.15;margin-bottom:6px}
+.hdr-title em{font-style:italic;color:rgba(255,255,255,.55)}
+.hdr-sub{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:32px}
+.hdr-stats{display:flex;gap:40px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+.stat-num{font-family:'DM Serif Display',serif;font-size:34px;line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:12px;color:rgba(255,255,255,.4);font-weight:500}
+
+/* FILTER BAR */
+.fbar{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 48px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 1px 0 var(--border)}
+.flabel{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-right:2px;white-space:nowrap}
+.fbtn{padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12.5px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;white-space:nowrap}
+.fbtn:hover{border-color:var(--text);color:var(--text)}
+.fbtn.on{background:var(--text);color:#fff;border-color:var(--text)}
+.fsep{width:1px;height:20px;background:var(--border);flex-shrink:0}
+
+/* BODY */
+.body{max-width:1200px;margin:0 auto;padding:36px 48px 100px}
+
+/* TRACK */
+.track{margin-bottom:16px;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:opacity .2s}
+.track.dim{opacity:.18;pointer-events:none}
+.thead{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.thead:hover{background:var(--bg2)}
+.ticon{font-size:22px;width:40px;text-align:center;flex-shrink:0}
+.tmeta{flex:1}
+.tname{font-size:16px;font-weight:600;margin-bottom:2px}
+.tdesc{font-size:12.5px;color:var(--text3)}
+.tcnt{font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px;white-space:nowrap}
+.tchev{font-size:14px;color:var(--text3);transition:transform .25s;flex-shrink:0}
+.track.closed .tchev{transform:rotate(-90deg)}
+.tbody{border-top:1px solid var(--border)}
+.track.closed .tbody{display:none}
+
+/* LEVEL ROW */
+.lvlrow{display:grid;grid-template-columns:88px 1fr;border-bottom:1px solid var(--border)}
+.lvlrow:last-child{border-bottom:none}
+.lvlrow.hide{display:none}
+.llabel{display:flex;align-items:center;justify-content:center;padding:12px 6px;border-right:1px solid var(--border);background:var(--bg)}
+.ltxt{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+.lcards{display:flex;flex-wrap:wrap;gap:10px;padding:12px 14px}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;width:200px;cursor:pointer;transition:all .15s;flex-shrink:0}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+.ctop{padding:11px 13px 9px;border-bottom:1px solid var(--border)}
+.ctitle{font-size:12.5px;font-weight:600;line-height:1.35;margin-bottom:3px}
+.csalary{font-size:11px;color:var(--text3)}
+.cbot{padding:7px 13px;display:flex;flex-wrap:wrap;gap:4px}
+.ctag{font-size:10px;padding:2px 7px;border-radius:4px;background:var(--bg2);border:1px solid var(--border);color:var(--text2);font-weight:500}
+
+/* TRACK COLOR THEMES */
+.t-d .thead{background:var(--d-bg)}.t-d .tname{color:var(--d)}.t-d .tcnt{background:var(--d-bg);color:var(--d);border:1px solid var(--d-bd)}.t-d .card{border-color:var(--d-bd)}.t-d .ctitle{color:var(--d)}.t-d .ctag{background:var(--d-bg);color:var(--d);border-color:var(--d-bd)}.t-d .card:hover{border-color:var(--d)}.t-d .llabel{background:var(--d-bg)}
+.t-co .thead{background:var(--co-bg)}.t-co .tname{color:var(--co)}.t-co .tcnt{background:var(--co-bg);color:var(--co);border:1px solid var(--co-bd)}.t-co .card{border-color:var(--co-bd)}.t-co .ctitle{color:var(--co)}.t-co .ctag{background:var(--co-bg);color:var(--co);border-color:var(--co-bd)}.t-co .card:hover{border-color:var(--co)}.t-co .llabel{background:var(--co-bg)}
+.t-br .thead{background:var(--br-bg)}.t-br .tname{color:var(--br)}.t-br .tcnt{background:var(--br-bg);color:var(--br);border:1px solid var(--br-bd)}.t-br .card{border-color:var(--br-bd)}.t-br .ctitle{color:var(--br)}.t-br .ctag{background:var(--br-bg);color:var(--br);border-color:var(--br-bd)}.t-br .card:hover{border-color:var(--br)}.t-br .llabel{background:var(--br-bg)}
+.t-da .thead{background:var(--da-bg)}.t-da .tname{color:var(--da)}.t-da .tcnt{background:var(--da-bg);color:var(--da);border:1px solid var(--da-bd)}.t-da .card{border-color:var(--da-bd)}.t-da .ctitle{color:var(--da)}.t-da .ctag{background:var(--da-bg);color:var(--da);border-color:var(--da-bd)}.t-da .card:hover{border-color:var(--da)}.t-da .llabel{background:var(--da-bg)}
+.t-pr2 .thead{background:var(--pr2-bg)}.t-pr2 .tname{color:var(--pr2)}.t-pr2 .tcnt{background:var(--pr2-bg);color:var(--pr2);border:1px solid var(--pr2-bd)}.t-pr2 .card{border-color:var(--pr2-bd)}.t-pr2 .ctitle{color:var(--pr2)}.t-pr2 .ctag{background:var(--pr2-bg);color:var(--pr2);border-color:var(--pr2-bd)}.t-pr2 .card:hover{border-color:var(--pr2)}.t-pr2 .llabel{background:var(--pr2-bg)}
+.t-ag .thead{background:var(--ag-bg)}.t-ag .tname{color:var(--ag)}.t-ag .tcnt{background:var(--ag-bg);color:var(--ag);border:1px solid var(--ag-bd)}.t-ag .card{border-color:var(--ag-bd)}.t-ag .ctitle{color:var(--ag)}.t-ag .ctag{background:var(--ag-bg);color:var(--ag);border-color:var(--ag-bd)}.t-ag .card:hover{border-color:var(--ag)}.t-ag .llabel{background:var(--ag-bg)}
+.t-pr .thead{background:var(--pr-bg)}.t-pr .tname{color:var(--pr)}.t-pr .tcnt{background:var(--pr-bg);color:var(--pr);border:1px solid var(--pr-bd)}.t-pr .card{border-color:var(--pr-bd)}.t-pr .ctitle{color:var(--pr)}.t-pr .ctag{background:var(--pr-bg);color:var(--pr);border-color:var(--pr-bd)}.t-pr .card:hover{border-color:var(--pr)}.t-pr .llabel{background:var(--pr-bg)}
+.t-ex .thead{background:var(--ex-bg)}.t-ex .tname{color:var(--ex)}.t-ex .tcnt{background:var(--ex-bg);color:var(--ex);border:1px solid var(--ex-bd)}.t-ex .card{border-color:var(--ex-bd)}.t-ex .ctitle{color:var(--ex)}.t-ex .ctag{background:var(--ex-bg);color:var(--ex);border-color:var(--ex-bd)}.t-ex .card:hover{border-color:var(--ex)}.t-ex .llabel{background:var(--ex-bg)}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--surface);border-radius:18px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.18)}
+.mbar{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:10;border-radius:18px 18px 0 0}
+.mtitle{font-size:14px;font-weight:600;color:var(--text2)}
+.mclose{background:var(--bg2);border:1px solid var(--border);border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:monospace}
+.mclose:hover{background:var(--bg3)}
+.mbody{padding:22px}
+.mh{font-family:'DM Serif Display',serif;font-size:24px;line-height:1.2;margin-bottom:5px}
+.mdesc{font-size:13.5px;color:var(--text2);line-height:1.65;margin-bottom:14px}
+.mbadges{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.mbadge{font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border2);color:var(--text2)}
+.msec{margin-bottom:16px}
+.mstitle{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.mlist{list-style:none}
+.mlist li{font-size:13.5px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--bg2);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
+.mlist li:last-child{border-bottom:none}
+.mlist li::before{content:'→';font-size:10px;opacity:.4;flex-shrink:0;margin-top:3px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.mbox{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px}
+.mboxt{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:9px}
+.fitbar{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px}
+.fitrow{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:12.5px}
+.fitrow:last-child{margin-bottom:0}
+.fitkey{width:95px;color:var(--text2);flex-shrink:0;font-weight:500}
+.fitwrap{flex:1;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.fitfill{height:100%;border-radius:3px;transition:width .5s ease}
+.fitpct{width:34px;text-align:right;color:var(--text3);font-size:11px}
+.mtags{display:flex;flex-wrap:wrap;gap:6px}
+.mtag{font-size:12px;padding:3px 9px;border-radius:5px;background:var(--bg2);border:1px solid var(--border);color:var(--text)}
+.mnext{display:flex;flex-wrap:wrap;gap:6px}
+.mnextitem{font-size:12px;padding:4px 10px;border-radius:5px;border:1px solid var(--border2);color:var(--text2);background:var(--surface)}
+.tip{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--d);border-radius:10px;padding:16px 20px;font-size:13px;color:var(--text2);line-height:1.7;margin-top:40px}
+.tip strong{color:var(--text)}
+
+@media(max-width:700px){
+.hdr{padding:32px 20px}
+.fbar{padding:12px 16px}
+.body{padding:20px 16px 60px}
+.mgrid{grid-template-columns:1fr}
+.card{width:160px}
+.lvlrow{grid-template-columns:56px 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-eye">Career Atlas · Việt Nam 2026</div>
+  <h1 class="hdr-title">Bản đồ <em>toàn diện</em><br>ngành Marketing</h1>
+  <p class="hdr-sub">Dành cho sinh viên mới tốt nghiệp muốn định hướng sự nghiệp trong marketing</p>
+  <div class="hdr-stats">
+    <div><div class="stat-num">60+</div><div class="stat-lbl">Vị trí công việc</div></div>
+    <div><div class="stat-num">8</div><div class="stat-lbl">Nhánh chuyên môn</div></div>
+    <div><div class="stat-num">5</div><div class="stat-lbl">Cấp bậc</div></div>
+    <div><div class="stat-num">∞</div><div class="stat-lbl">Hướng kết hợp</div></div>
+  </div>
+</div>
+
+<div class="fbar" id="fbar"></div>
+
+<div class="body" id="bodyWrap"></div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <div class="mbar"><span class="mtitle" id="modalTitle"></span><button class="mclose" onclick="closeModal()">×</button></div>
+    <div class="mbody" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const FC={creative:'#D85A30',analytical:'#7c3aed',social:'#0F9D6A',strategic:'#c27213',technical:'#185FA5'};
+const FL={creative:'Sáng tạo',analytical:'Phân tích',social:'Giao tiếp',strategic:'Chiến lược',technical:'Kỹ thuật'};
+
+const DATA=[
+{id:'d',cls:'t-d',icon:'📊',name:'Digital Marketing',desc:'Quảng cáo trả phí, SEO, email, automation — đo được ROI rõ ràng',levels:[
+{label:'Intern / Fresher',lid:'entry',positions:[
+{title:'Digital Marketing Intern',salary:'2–5tr',tags:['Meta Ads','Google Ads','Analytics'],desc:'Vị trí học việc — hỗ trợ chạy campaign và tổng hợp báo cáo. Bàn đạp lý tưởng cho người mới.',daily:['Hỗ trợ setup và theo dõi campaign quảng cáo','Tổng hợp báo cáo số liệu hàng ngày','Nghiên cứu đối thủ và xu hướng thị trường','Học cách đọc dashboard và phân tích dữ liệu cơ bản'],skills:['Google Ads cơ bản','Meta Ads Manager','Excel / Google Sheets','Google Analytics 4 (xem báo cáo)','Mindset học hỏi nhanh'],tools:['Meta Business Suite','Google Ads','Google Analytics 4','Canva (banner)','Looker Studio (đọc)'],certs:['Google Digital Garage (miễn phí)','Meta Blueprint Fundamentals','HubSpot Email Marketing'],howto:['Apply vào agency digital nhỏ — dễ nhận intern nhất','CV 1 trang + 1 case study nhỏ tự làm (fanpage, blog cá nhân)','Chứng chỉ Google Digital Garage giúp nổi bật hơn trong đống CV','Nộp: Tomorrow Marketers, Adsota, Novaon, startup FMCG'],next:['Digital Marketing Executive','Content Marketing Executive','Social Media Executive'],fit:{creative:30,analytical:70,social:40,strategic:30,technical:50}},
+{title:'Digital Marketing Executive',salary:'7–14tr',tags:['Meta Ads','Google Ads','Optimization','Báo cáo'],desc:'Tự chạy và tối ưu campaign độc lập. Vị trí phổ biến nhất trong ngành.',daily:['Chạy và tối ưu Meta Ads, Google Ads hàng ngày','Theo dõi CTR, CPC, ROAS, CPA mỗi sáng','Lên kế hoạch campaign theo tháng','Báo cáo hiệu quả marketing cho manager','Phối hợp team content, design để có creative tốt'],skills:['Meta Ads nâng cao','Google Ads Search + Display','Google Analytics 4','Phân tích data','Lên kế hoạch campaign','Tối ưu budget hiệu quả'],tools:['Meta Ads Manager','Google Ads','Google Analytics 4','Google Tag Manager (cơ bản)','Looker Studio','Excel pivot table'],certs:['Google Ads Search Certification','Meta Media Buying Professional','Google Analytics Certification'],howto:['Tạo portfolio: chạy fanpage cá nhân hoặc cho cửa hàng quen biết','Ghi lại kết quả: "chạy X triệu/tháng, đạt ROAS Y, giảm CPC Z%"','Nộp vào agency hoặc SME — tập đoàn lớn khó vào khi 0 kinh nghiệm','Chứng chỉ Google/Meta là bắt buộc để qua vòng lọc CV'],next:['Performance Marketing Specialist','Growth Hacker','E-commerce Marketing Specialist'],fit:{creative:35,analytical:75,social:35,strategic:40,technical:55}}
+]},
+{label:'Specialist (2–4 năm)',lid:'mid',positions:[
+{title:'Performance Marketing Specialist',salary:'15–28tr',tags:['ROI','A/B Test','Funnel','CRO'],desc:'Chuyên tối ưu lợi nhuận từ quảng cáo. Quản lý ngân sách lớn, focus vào ROAS và CPA.',daily:['Quản lý budget ads 100tr–1 tỷ/tháng','A/B test creative, audience, bidding liên tục','Phân tích conversion funnel và tìm điểm rò rỉ','Tối ưu landing page cùng dev/design','Build báo cáo weekly cho C-level'],skills:['Multi-platform ads (Meta+Google+TikTok)','Attribution modeling','Conversion Rate Optimization','SQL cơ bản','Funnel analysis','Landing page optimization'],tools:['Facebook CAPI','Google Ads Smart Bidding','Hotjar / Clarity','Looker Studio','AppsFlyer / Adjust','SQL / BigQuery cơ bản'],certs:['Google Ads Professional','Meta Certified Media Buying Pro','Mixpanel fundamentals'],howto:['Cần 2+ năm kinh nghiệm chạy ads với budget thực','Portfolio: screenshot dashboard + KPI đạt được','Thể hiện tư duy "tăng ROAS" không chỉ "chạy đúng budget"','Trả lời được: "Nếu CPA tăng 20%, bạn xử lý thế nào?"'],next:['Head of Performance','Growth Manager','Digital Marketing Manager'],fit:{creative:25,analytical:90,social:25,strategic:55,technical:70}},
+{title:'SEO Specialist',salary:'12–22tr',tags:['On-page','Technical SEO','Link building','Keywords'],desc:'Tối ưu thứ hạng tìm kiếm tự nhiên. Kết hợp kỹ thuật website và chiến lược nội dung.',daily:['Nghiên cứu từ khóa và phân tích search intent','Audit on-page: title, meta, schema, internal link','Technical SEO: tốc độ tải, Core Web Vitals','Xây dựng backlink profile chất lượng','Theo dõi ranking và organic traffic qua GSC'],skills:['Keyword research','On-page optimization','Technical SEO','Link building','Content strategy cho SEO','HTML/CSS cơ bản'],tools:['Ahrefs / Semrush','Google Search Console','Screaming Frog','Google PageSpeed Insights','Surfer SEO','WordPress'],certs:['Ahrefs Academy (miễn phí)','Semrush SEO Fundamentals'],howto:['Tạo blog cá nhân và rank bài viết thực tế — portfolio tốt nhất','Portfolio: "Tối ưu site X, organic traffic tăng Y% trong Z tháng"','Biết HTML cơ bản giúp làm việc với dev team hiệu quả','Nhiều cơ hội freelance remote — ngách ít người thực sự giỏi'],next:['SEO Manager','Head of SEO','Digital Marketing Manager','Freelance SEO Consultant'],fit:{creative:40,analytical:75,social:20,strategic:55,technical:75}},
+{title:'SEM / Paid Search Specialist',salary:'14–24tr',tags:['Google Ads','Shopping','PMax','Quality Score'],desc:'Chuyên sâu Google Ads: Search, Shopping, Performance Max. Tối ưu keyword và quality score.',daily:['Quản lý cấu trúc campaign Google Ads','Nghiên cứu từ khóa tiêu cực (negative keywords)','Tối ưu Quality Score và Ad Rank','Phân tích Auction Insights so với đối thủ','A/B test ad copy và extension'],skills:['Google Ads nâng cao','Keyword research chuyên sâu','Bidding strategy','Quality Score optimization','Shopping / PMax campaign'],tools:['Google Ads Editor','Google Merchant Center','Search Ads 360','Google Analytics 4','Semrush'],certs:['Google Ads Search Certification','Google Ads Shopping Certification','Google Ads Display Certification'],howto:['Học Google Ads Editor — quản lý campaign quy mô lớn cần tool này','Thực hành trên tài khoản thực (xin phép người thân dùng budget nhỏ)','Đọc Google Ads blog chính thức hàng tuần — thuật toán thay đổi liên tục','Portfolio: ghi rõ impression share, CPC, conversion rate trước/sau'],next:['Performance Marketing Specialist','Digital Marketing Manager','Freelance SEM Consultant'],fit:{creative:30,analytical:85,social:20,strategic:50,technical:65}},
+{title:'Email / CRM Marketing Specialist',salary:'13–22tr',tags:['Automation','Segmentation','Lifecycle','HubSpot'],desc:'Xây dựng hành trình khách hàng qua email và CRM. Retention marketing — giữ chân khách cũ.',daily:['Thiết kế automation flow: onboarding, upsell, re-engagement','Phân khúc danh sách khách theo hành vi','A/B test subject line, content, send time','Quản lý database và health of list','Báo cáo open rate, CTR, revenue from email'],skills:['Marketing automation','Email copywriting','List segmentation','CRM management','HTML email cơ bản','Data analysis'],tools:['HubSpot / Mailchimp / Klaviyo','Braze / Iterable (công ty lớn)','Google Analytics','SQL cơ bản','Canva (email design)'],certs:['HubSpot Email Marketing Certification (miễn phí)','HubSpot CRM Certification','Klaviyo Product Certification'],howto:['Tạo tài khoản HubSpot free tier và tự build 3 automation flow','Học HubSpot Academy — toàn bộ miễn phí và rất bài bản','Ngách này ít người giỏi ở VN — ít cạnh tranh hơn ads nhiều','Thể hiện: "automation flow X giúp tăng retention Y%"'],next:['CRM Manager','Lifecycle Marketing Manager','Marketing Automation Lead'],fit:{creative:45,analytical:70,social:30,strategic:55,technical:60}},
+{title:'Social Media Specialist',salary:'12–20tr',tags:['Facebook','TikTok','Instagram','Community'],desc:'Quản lý chiến lược và nội dung mạng xã hội. Xây dựng cộng đồng và tương tác thương hiệu.',daily:['Lên kế hoạch content calendar tháng/tuần','Quản lý fanpage: đăng bài, reply comment, inbox','Theo dõi trend và đề xuất content viral','Phối hợp content/design để ra ấn phẩm','Báo cáo engagement rate, reach, follower growth'],skills:['Platform expertise (FB/TikTok/IG/LinkedIn)','Content strategy','Community management','Video/reels scripting','Analytics & reporting','Crisis management'],tools:['Meta Business Suite','TikTok Business Center','Hootsuite / Sprout Social','CapCut / Premiere Rush','Fanpage Karma','Canva'],certs:['Meta Social Media Marketing Certificate','TikTok Marketing Science Certification'],howto:['Tự xây fanpage/TikTok cá nhân — dù 5k followers cũng đủ để nói chuyện','Phân tích 3–5 brand bạn ngưỡng mộ: đăng gì, lúc nào, engagement thế nào','Học CapCut/Premiere Rush để tự edit video ngắn','CV cần: link page đã quản lý + metrics tăng trưởng rõ ràng'],next:['Social Media Manager','Community Manager','Influencer Marketing Manager','Brand Specialist'],fit:{creative:70,analytical:50,social:80,strategic:50,technical:35}},
+{title:'Growth Hacker / Growth Marketer',salary:'15–30tr',tags:['Viral loops','A/B Test','Retention','Data-driven'],desc:'Tìm kiếm cơ chế tăng trưởng phi tuyến. Phổ biến nhất ở startup tech.',daily:['Thiết kế và chạy growth experiment hàng tuần','Phân tích funnel acquisition → activation → retention','Xây dựng referral/viral loop','Làm việc chặt chẽ với product và engineering','Build growth model và dự báo tăng trưởng'],skills:['Experimentation framework','Funnel analysis','Referral/viral mechanics','SQL & data analysis','Product thinking','Multi-channel growth'],tools:['Mixpanel / Amplitude','SQL / Metabase','Google Optimize / VWO','Braze / Iterable','Python cơ bản (lợi thế)'],certs:['Reforge Growth Program','CXL Growth Marketing'],howto:['Cần nền tảng: ít nhất 2 năm làm performance marketing hoặc product','Đọc "Hacking Growth" (Sean Ellis) và blog của Reforge','Học SQL tối thiểu — không thể làm growth nếu phụ thuộc data team','Startup Series A–C là môi trường tốt nhất để học growth thực chiến'],next:['Growth Manager','Head of Growth','VP Growth','Product Marketing Manager'],fit:{creative:45,analytical:85,social:35,strategic:75,technical:70}}
+]},
+{label:'Manager / Lead (4+ năm)',lid:'senior',positions:[
+{title:'Digital Marketing Manager',salary:'28–50tr',tags:['Team lead','Full-funnel','Budget','Strategy'],desc:'Quản lý toàn bộ hoạt động digital marketing. Dẫn dắt team 3–8 người.',daily:['Lập và quản lý ngân sách digital marketing toàn bộ','Review và phê duyệt campaign trước khi chạy','1-on-1 với team, assign task và review performance','Họp định kỳ với C-level về KPI và chiến lược','Đánh giá và lựa chọn agency/vendor/tool mới'],skills:['Full-funnel digital strategy','Team management','Budget allocation','Stakeholder communication','Data-driven decision making','Vendor management'],tools:['Toàn bộ digital stack','BI tools (Looker/Tableau)','Project management tools','CRM nâng cao'],certs:['MBA (lợi thế lớn)','Google Marketing Platform Certification'],howto:['Cần 4+ năm kinh nghiệm với ít nhất 2 năm ở specialist level','Record dẫn dắt ít nhất 1 project lớn từ đầu đến cuối','Thể hiện tư duy kinh doanh, không chỉ marketing kỹ thuật','Nhiều vị trí manager filled qua network — xây quan hệ từ sớm'],next:['Head of Digital Marketing','CMO','VP Marketing'],fit:{creative:40,analytical:75,social:60,strategic:80,technical:55}},
+{title:'Marketing Operations Manager',salary:'25–45tr',tags:['Martech stack','Automation','Data governance','CRM ops'],desc:'Quản lý hệ thống martech. Đảm bảo data chính xác và automation chạy đúng.',daily:['Quản lý và tối ưu martech stack','Xây dựng và maintain automation workflows','Đảm bảo data quality và governance','Phối hợp marketing và IT/engineering','Train marketing team sử dụng tools mới'],skills:['Martech stack management','Marketing automation','Data management','CRM administration','HTML/CSS (email templates)','API integration cơ bản'],tools:['HubSpot / Marketo / Salesforce Marketing Cloud','Zapier / Make (automation)','Segment / mParticle (CDP)','Google Tag Manager','SQL'],certs:['HubSpot Marketing Software Certification','Salesforce Marketing Cloud Email Specialist','Marketo Certified Expert'],howto:['Học HubSpot hoặc Salesforce Marketing Cloud chứng chỉ để bắt đầu','Ngách ít người biết đến nhưng lương rất tốt và ít cạnh tranh','Phù hợp người vừa thích marketing vừa thích technical/system','B2B SaaS và tech company là nơi tuyển nhiều nhất'],next:['Head of Marketing Technology','VP Revenue Operations'],fit:{creative:20,analytical:80,social:35,strategic:55,technical:85}}
+]}
+]},
+
+{id:'co',cls:'t-co',icon:'✍️',name:'Content Marketing',desc:'Blog, SEO content, copywriting, video, strategy',levels:[
+{label:'Intern / Fresher',lid:'entry',positions:[
+{title:'Content Writer / Copywriter Intern',salary:'3–6tr',tags:['Viết lách','SEO cơ bản','Social copy'],desc:'Viết bài blog, caption mạng xã hội, email. Bước đầu cho người có thiên hướng ngôn ngữ.',daily:['Viết 3–5 bài blog hoặc caption/ngày','Research từ khóa và viết theo brief','Chỉnh sửa bài dựa trên feedback editor','Đóng góp ý tưởng content trong brainstorm','Học format chuẩn SEO và cấu trúc bài viết'],skills:['Viết tiếng Việt (hoặc Anh) tốt','Nghiên cứu và tổng hợp thông tin','SEO on-page cơ bản','Storytelling cơ bản','Canva (thiết kế ảnh đơn giản)'],tools:['Google Docs','WordPress / Webflow','Hemingway App','Grammarly','Ubersuggest (free)'],certs:['HubSpot Content Marketing Certification (miễn phí)','Ahrefs Academy - Content Marketing'],howto:['Tạo blog cá nhân và viết đều 2–3 bài/tuần trong 1–2 tháng','Chia sẻ bài và đo traffic — tạo thói quen track số liệu ngay từ đầu','Portfolio: 5 bài viết tốt nhất + nêu kết quả (traffic, engagement)','Apply agency content hoặc media company: startup F&B, e-commerce, giáo dục'],next:['Content Executive','SEO Content Specialist','Copywriter'],fit:{creative:85,analytical:30,social:50,strategic:35,technical:25}},
+{title:'Content Executive',salary:'7–13tr',tags:['Content calendar','Blog','Social','Email'],desc:'Quản lý toàn bộ nội dung hàng ngày của thương hiệu. Lên kế hoạch và sản xuất đa định dạng.',daily:['Quản lý content calendar và đảm bảo đăng đúng hạn','Viết đa dạng: blog, caption, email, script video','Brief freelancer/agency cho content outsource','Phân tích hiệu quả content và điều chỉnh','Phối hợp với design/video để ra ấn phẩm đồng bộ'],skills:['Multi-format content creation','Content planning','Basic SEO','Briefing skills','Analytics (Google/Meta insights)'],tools:['Notion / Trello (content calendar)','WordPress / Contentful','Canva','HubSpot / Mailchimp','Google Analytics'],certs:['HubSpot Content Marketing','Google Digital Marketing & E-commerce'],howto:['1 năm kinh nghiệm viết lách có thể apply','Portfolio: 3–5 bài viết dạng khác nhau (blog, caption, email)','Nêu rõ loại content nào bạn viết tốt nhất và kết quả đạt được','Startup, SME dễ vào nhất — được làm nhiều thứ cùng lúc'],next:['Content Specialist','Content Strategist','Brand Content Manager'],fit:{creative:80,analytical:40,social:55,strategic:45,technical:30}}
+]},
+{label:'Specialist (2–4 năm)',lid:'mid',positions:[
+{title:'SEO Content Specialist',salary:'12–20tr',tags:['SEO writing','Topic clusters','EEAT','Keyword'],desc:'Viết content tối ưu cho tìm kiếm. Kết hợp kỹ năng SEO và storytelling chuyên sâu.',daily:['Nghiên cứu từ khóa và mapping content plan','Viết bài dài 1500–3000 từ chuẩn SEO','Tối ưu bài cũ (content refresh) để tăng ranking','Xây dựng internal link structure','Theo dõi ranking và điều chỉnh content'],skills:['SEO writing chuyên sâu','Keyword research','Topic cluster strategy','Content brief writing','HTML on-page basics','Analytics interpretation'],tools:['Ahrefs / Semrush','Surfer SEO / Clearscope','Google Search Console','WordPress','Screaming Frog'],certs:['Ahrefs SEO Writing Course','Semrush Content Marketing Toolkit'],howto:['2+ năm viết content + học SEO bài bản','Portfolio: bài đã rank top 10 Google với keyword rõ ràng','Chụp screenshot Google Search Console trước/sau optimize','Nhiều cơ hội freelance remote — agency nước ngoài hay thuê'],next:['Content Strategist','Head of Content','SEO Manager'],fit:{creative:65,analytical:65,social:25,strategic:55,technical:55}},
+{title:'Copywriter',salary:'13–25tr',tags:['Ad copy','Landing page','Brand voice','UX copy'],desc:'Viết chuyển đổi: headline quảng cáo, landing page, email sequence, tagline thương hiệu.',daily:['Viết headline và copy cho quảng cáo A/B test','Phát triển và duy trì brand voice guideline','Viết landing page cùng UX team','Script TVC, video content, podcast','Brainstorm concept chiến dịch cùng creative team'],skills:['Persuasive writing','Brand voice development','UX writing','Direct response copywriting','Consumer psychology','Storytelling nâng cao'],tools:['Google Docs','Figma (xem wireframe)','Hotjar (xem behavior)','Hemingway App','Thư viện swipe file cá nhân'],certs:['AWAI Copywriting Fundamentals','Copyhackers courses','CXL Conversion Copywriting'],howto:['Build "swipe file" — bộ sưu tập copy tốt từ các brand lớn','Viết lại ad copy của 10 brand nổi tiếng theo phong cách riêng','Portfolio: brief → insight → copy → kết quả A/B test','Agency creative là môi trường tốt nhất để luyện copywriting'],next:['Senior Copywriter','Creative Director','Head of Content'],fit:{creative:90,analytical:45,social:50,strategic:60,technical:20}},
+{title:'Video / Multimedia Content Creator',salary:'10–22tr',tags:['Script','Video edit','YouTube','TikTok'],desc:'Sản xuất nội dung video cho YouTube, TikTok, Reels. Kết hợp storytelling và sản xuất.',daily:['Viết script và storyboard cho video','Quay và dựng video (edit)','Tối ưu thumbnail, title, description','Phân tích view rate, watch time, engagement','Đề xuất format video phù hợp từng nền tảng'],skills:['Scriptwriting','Video editing','Platform algorithm knowledge','Thumbnail design','YouTube/TikTok Analytics','Directing/On-camera'],tools:['Premiere Pro / DaVinci Resolve','CapCut','After Effects (motion graphic)','Canva (thumbnail)','YouTube Studio','TikTok Creator Tools'],certs:['YouTube Creator Academy','DaVinci Resolve Certification'],howto:['Tạo kênh cá nhân và sản xuất ít nhất 20 video — thử thất bại sớm','So sánh analytics: video nào giữ người xem lâu nhất và tại sao','Portfolio: channel link + video đạt nhiều view/retention tốt','Brand nào cũng cần video — dễ tìm việc nếu có reel demo tốt'],next:['Head of Content','Content Director','Creative Director','Influencer/Creator'],fit:{creative:85,analytical:45,social:65,strategic:45,technical:60}},
+{title:'Content Strategist',salary:'18–32tr',tags:['Strategy','Topic map','Buyer journey','Editorial'],desc:'Lên chiến lược nội dung dài hạn. Kết nối content với mục tiêu kinh doanh cụ thể.',daily:['Xây dựng content strategy 6–12 tháng','Map content theo buyer journey từng giai đoạn','Đặt brief cho cả team content','Phân tích content gap và cơ hội tăng trưởng','Đo lường ROI của từng loại content','Align với SEO, demand gen, brand teams'],skills:['Content strategy framework','Customer journey mapping','SEO strategy','Editorial planning','Data analysis','Cross-team collaboration'],tools:['Ahrefs / Semrush','HubSpot / Contentful CMS','Google Analytics + GSC','Notion / Airtable (planning)','Looker Studio'],certs:['HubSpot Content Marketing Advanced','Content Marketing Institute courses'],howto:['3+ năm làm content executive hoặc SEO specialist','Thể hiện: "content strategy của tôi đã drive kết quả kinh doanh cụ thể"','Case study: content → leads → revenue (có số liệu rõ ràng)','B2B SaaS, tài chính, giáo dục — ngành cần strategist nhất'],next:['Head of Content','Content Director','Marketing Manager','CMO'],fit:{creative:65,analytical:65,social:45,strategic:85,technical:40}}
+]},
+{label:'Manager / Lead (4+ năm)',lid:'senior',positions:[
+{title:'Head of Content / Content Director',salary:'35–60tr',tags:['Editorial leadership','Team','Budget','Multi-channel'],desc:'Dẫn dắt toàn bộ chiến lược và sản xuất content. Quản lý team 5–15 người.',daily:['Đặt định hướng editorial và brand voice toàn công ty','Quản lý team content writer, video creator, social media','Phê duyệt content strategy và editorial calendar','Họp với marketing leadership về content KPI','Phối hợp design, SEO, paid để tối ưu content distribution'],skills:['Content leadership','Multi-format content production','Budget management','Stakeholder management','Data-driven content decisions'],tools:['Full content stack','CMS nâng cao','BI tools (tracking content ROI)'],certs:['MBA (lợi thế)','Content Marketing World Speaker level'],howto:['5+ năm trong ngành content, 2+ năm lead team nhỏ','Case study: "content strategy tôi dẫn dắt đã tạo ra X triệu revenue"','Build personal brand mạnh trên LinkedIn, blog, speaking events'],next:['CMO','VP Marketing','Chief Content Officer','Founder Agency'],fit:{creative:70,analytical:60,social:65,strategic:85,technical:35}}
+]}
+]},
+
+{id:'br',cls:'t-br',icon:'🏷️',name:'Brand & Trade Marketing',desc:'Xây dựng thương hiệu, chiến dịch 360, kích hoạt điểm bán',levels:[
+{label:'Intern / Fresher',lid:'entry',positions:[
+{title:'Brand Marketing Intern / Executive',salary:'3–12tr',tags:['Brand guideline','Campaign support','Consumer insight','Research'],desc:'Hỗ trợ team brand trong chiến dịch, nghiên cứu thị trường và sản xuất tài liệu thương hiệu.',daily:['Hỗ trợ chuẩn bị materials cho campaign','Research brand perception và đối thủ cạnh tranh','Phối hợp với agency để track tiến độ','Làm báo cáo và slide presentation','Tham gia brand activation, event thực địa'],skills:['Viết brief cơ bản','Research thị trường','PowerPoint/Slides bài bản','Consumer insight cơ bản','Tư duy thương hiệu'],tools:['PowerPoint / Google Slides','Excel / Sheets','Canva','Survey tools (Google Forms, SurveyMonkey)'],certs:['Coursera Brand Management — Kellogg (khuyên học)','Young Marketers Elite Program'],howto:['Tham gia Young Marketers, MM4YB — được tuyển dụng trực tiếp','Apply MT program tại Unilever, P&G, Masan (cổng tốt nhất)','GPA ổn + hoạt động ngoại khóa marketing + tư duy sắc sảo','Chuẩn bị kỹ case study phỏng vấn — FMCG hỏi case rất nhiều'],next:['Brand Executive','Trade Marketing Executive','Marketing Communications Executive'],fit:{creative:65,analytical:50,social:60,strategic:60,technical:20}},
+{title:'Trade Marketing Executive',salary:'8–15tr',tags:['POS materials','Channel activation','Shopper','Distribution'],desc:'Kích hoạt điểm bán và tối ưu trải nghiệm mua hàng tại kênh phân phối.',daily:['Thiết kế và triển khai POSM (poster, wobbler, shelf talker)','Làm việc với sales team để push campaign tại kênh','Phân tích sell-out data tại các kênh phân phối','Quản lý promotion tại điểm bán (GT, MT, online)','Khảo sát thực tế tại siêu thị, cửa hàng tạp hóa'],skills:['Channel marketing','POSM design brief','Shopper behavior','Sales collaboration','Data analysis (sellout)','Promotion mechanics'],tools:['PowerPoint','Excel (sell-out analysis)','Canva (brief thiết kế)','Field force apps'],certs:['Khóa Trade Marketing chuyên biệt (Nielsen, Kantar)'],howto:['FMCG là ngành cần nhiều Trade Marketing nhất','Apply thẳng vào brand lớn hoặc distributor lớn (Phú Thái, Saigon Co.op)','Phải hiểu kênh GT vs MT vs online','Kinh nghiệm field (ra ngoài thị trường) được đánh giá rất cao'],next:['Trade Marketing Manager','Channel Marketing Manager','Brand Manager'],fit:{creative:50,analytical:60,social:65,strategic:55,technical:30}}
+]},
+{label:'Specialist (2–4 năm)',lid:'mid',positions:[
+{title:'Brand Executive / Senior Brand Executive',salary:'12–22tr',tags:['Brand strategy','Agency management','Campaign P&L','Consumer insight'],desc:'Thực thi chiến lược thương hiệu. Làm việc với agency từ brief đến launch campaign.',daily:['Viết brief cho agency creative và media','Review và approve creative từ agency','Quản lý budget nhỏ của từng campaign','Phân tích consumer insight từ research data','Phối hợp trade, digital, PR để campaign đồng bộ'],skills:['Brand strategy basics','Creative brief writing','Agency management','Consumer research reading','Project management','Integrated campaign planning'],tools:['PowerPoint (deck making)','Brand tracking tools (Kantar, Nielsen)','Market research platforms','Kantar Worldpanel cơ bản'],certs:['Coursera Brand Management (Kellogg)','IAA Certificate in Marketing & Brand Management'],howto:['2+ năm làm intern/fresher tại brand team','Portfolio: 1–2 campaign bạn có đóng góp thực sự','FMCG brand executive được trọng dụng nhất: P&G, Unilever, Masan, L\'Oreal','Phát triển quan hệ với agency từ sớm'],next:['Brand Manager','Senior Brand Manager','Marketing Manager'],fit:{creative:60,analytical:55,social:65,strategic:70,technical:25}},
+{title:'Marketing Communications Executive',salary:'11–20tr',tags:['IMC','Media planning','PR coordination','Campaign'],desc:'Lên kế hoạch và thực thi truyền thông tích hợp. Kết nối tất cả kênh: digital, PR, event, OOH.',daily:['Lên media plan và phân bổ ngân sách các kênh','Phối hợp với PR, digital, event agencies','Quản lý lịch communication và key messages','Review tài liệu truyền thông đảm bảo brand consistency','Báo cáo share of voice và campaign effectiveness'],skills:['Integrated Marketing Communications','Media planning','Agency coordination','Brand consistency management','Campaign measurement'],tools:['Media planning tools','Social listening (Buzzsumo, Mention)','PowerPoint','Nielsen / Kantar data (đọc)'],certs:['IAB Digital Marketing Fundamentals','CIM Certificate in Marketing'],howto:['Phù hợp với người thích nhìn bức tranh lớn, không đi sâu 1 kênh','Nộp vào tập đoàn FMCG, ngân hàng, telco — ngân sách truyền thông lớn','Thường tuyển từ brand team hoặc agency account có kinh nghiệm'],next:['Marketing Manager','Brand Manager','Communications Manager'],fit:{creative:55,analytical:55,social:70,strategic:70,technical:25}},
+{title:'Event & Activation Executive',salary:'10–18tr',tags:['Event management','Brand activation','POSM','Experiential'],desc:'Tổ chức sự kiện và kích hoạt thương hiệu trực tiếp. Từ road show đến lễ ra mắt sản phẩm.',daily:['Lên kế hoạch và quản lý sự kiện từ A–Z','Brief và quản lý event vendor/supplier','Phối hợp brand, PR, digital cho events đồng bộ','Quản lý ngân sách và timeline nghiêm ngặt','Đo lường hiệu quả sự kiện (footfall, samples, leads)'],skills:['Event management','Budget management','Vendor management','Logistics planning','On-ground activation','Crisis handling'],tools:['Project management tools','Excel (budget tracker)','Canva (event materials)','Venue management software'],certs:['CMP - Certified Meeting Professional'],howto:['Kinh nghiệm tổ chức sự kiện ở trường rất có giá trị — ghi rõ vào CV','Apply event agency trước để học nhanh: Lighthouse Events, Phibious, MediaZ','Tính kỹ càng, chi tiết là bắt buộc — lỗi nhỏ trong event = thảm họa lớn'],next:['Event Manager','Trade Marketing Manager','Brand Experience Manager'],fit:{creative:60,analytical:50,social:80,strategic:50,technical:30}}
+]},
+{label:'Manager / Lead (4+ năm)',lid:'senior',positions:[
+{title:'Brand Manager',salary:'28–55tr',tags:['Brand P&L','NPD','Agency lead','Consumer strategy'],desc:'Sở hữu P&L và chiến lược của 1–3 nhãn hàng. Đỉnh cao của lộ trình brand marketing.',daily:['Sở hữu toàn bộ P&L nhãn hàng','Phát triển brand strategy 3–5 năm','Lead agency 360 độ (creative, media, PR, digital)','Phối hợp R&D để phát triển sản phẩm mới','Họp monthly với General Manager về business performance'],skills:['P&L management','Consumer strategy','New product development','Agency leadership','Cross-functional leadership','Business acumen'],tools:['Nielsen / Kantar Worldpanel','IRI / SIG data','Brand health tracker','SAP / ERP cơ bản'],certs:['MBA (rất được trọng dụng tại FMCG)','CIM Chartered Marketing Professional'],howto:['Lộ trình nhanh nhất: MT program tại P&G/Unilever (3–4 năm lên manager)','Hoặc: 4–5 năm brand executive → senior executive → manager','Young Marketers Elite tạo nền tảng quan trọng','Phỏng vấn cần trả lời được câu hỏi P&L và marketing case study'],next:['Senior Brand Manager','Marketing Director','CMO','Business Unit Head'],fit:{creative:55,analytical:65,social:65,strategic:90,technical:20}},
+{title:'Trade Marketing Manager',salary:'25–45tr',tags:['Channel strategy','Shopper marketing','Distributor management'],desc:'Xây dựng chiến lược kênh phân phối toàn quốc. Tối ưu sell-out tại mọi điểm chạm người mua.',daily:['Xây dựng channel strategy và shopper marketing plan','Quản lý ngân sách trade spending','Làm việc với sales leadership về target và execution','Phát triển chương trình loyalty cho nhà phân phối','Phân tích Nielsen distribution và market share data'],skills:['Channel strategy','Shopper marketing','Trade spending optimization','Sales collaboration','Data analysis (Nielsen, Kantar)'],tools:['Nielsen Retail Measurement Service','Kantar Shopper','SAP','Excel nâng cao'],certs:['Nielsen Academy courses'],howto:['5+ năm trong trade marketing, kết hợp cả GT và MT exposure','Phải biết đọc Nielsen data thành thạo','Cần quan hệ tốt với cả sales team nội bộ và distributor bên ngoài'],next:['National Trade Marketing Director','Commercial Director','CMO'],fit:{creative:40,analytical:70,social:70,strategic:75,technical:35}}
+]}
+]},
+
+{id:'da',cls:'t-da',icon:'📈',name:'Data & Analytics Marketing',desc:'Phân tích dữ liệu, martech, marketing science — lương cao, ít cạnh tranh',levels:[
+{label:'Fresher',lid:'entry',positions:[
+{title:'Marketing Data Analyst (Entry)',salary:'8–15tr',tags:['SQL','GA4','Dashboard','Reporting'],desc:'Phân tích và báo cáo hiệu quả marketing. Cần nền tảng kỹ thuật tốt hơn các vị trí khác.',daily:['Pull data từ GA4, Ads, CRM và tổng hợp','Build và duy trì dashboard báo cáo','Trả lời câu hỏi ad-hoc của marketing team','Làm sạch và chuẩn hóa dữ liệu','Học thêm kỹ năng SQL và visualization'],skills:['SQL cơ bản–trung bình','Google Analytics 4','Excel nâng cao (pivot, vlookup)','Looker Studio / Tableau cơ bản','Tư duy phân tích'],tools:['Google Analytics 4','Looker Studio','SQL (BigQuery / MySQL)','Excel','Google Ads / Meta Ads API cơ bản'],certs:['Google Analytics Certification','SQL courses (Mode Analytics, DataCamp)','Google Data Analytics (Coursera)'],howto:['Phải học SQL ngay — không có SQL thì không thể làm analytics','Tạo project cá nhân: phân tích dataset công khai và làm dashboard','Bằng QTKD + SQL + Google Analytics = bộ 3 đủ để apply','Startup tech là nơi nhiều data nhất và dễ học thực chiến nhất'],next:['Marketing Analyst','Growth Analyst','Marketing Data Scientist'],fit:{creative:15,analytical:95,social:20,strategic:45,technical:80}}
+]},
+{label:'Specialist (2–4 năm)',lid:'mid',positions:[
+{title:'Marketing Analyst / Senior Marketing Analyst',salary:'15–30tr',tags:['Attribution','Cohort analysis','A/B testing','Segmentation'],desc:'Phân tích sâu: customer segmentation, attribution modeling, campaign measurement.',daily:['Xây dựng attribution model cho campaigns đa kênh','Phân tích cohort retention và customer LTV','Thiết kế A/B test framework cho marketing team','Build predictive model đơn giản (churn, LTV forecast)','Trình bày insight cho marketing leadership và C-level'],skills:['SQL nâng cao','Python/R cơ bản','Statistical analysis','Attribution modeling','Customer segmentation','Data visualization'],tools:['BigQuery / Snowflake','Python (Pandas, Matplotlib)','Tableau / Looker','Mixpanel / Amplitude','Excel nâng cao','dbt'],certs:['Google Advanced Data Analytics (Coursera)','DataCamp Marketing Analytics track','CXL Analytics & Testing'],howto:['2+ năm làm analytics hoặc 1 năm + bằng kỹ thuật (IT, thống kê)','Portfolio: project GitHub với phân tích marketing thực tế','Kết hợp kỹ thuật + hiểu biết marketing = hiếm và đắt giá','Apply vào tech company, fintech, e-commerce — họ data-driven nhất'],next:['Marketing Data Scientist','Head of Marketing Analytics','Growth Manager'],fit:{creative:10,analytical:95,social:25,strategic:60,technical:90}},
+{title:'Marketing Data Scientist',salary:'25–50tr',tags:['ML','Predictive','Personalization','MMM'],desc:'Áp dụng machine learning vào marketing: recommendation, churn prediction, marketing mix modeling.',daily:['Xây dựng Marketing Mix Model (MMM) để tối ưu ngân sách','Phát triển recommendation engine cho personalization','Churn prediction model và retention intervention','Phân tích NLP (review, comment) về brand sentiment','Trình bày kết quả complex models cho non-technical audience'],skills:['Python / R nâng cao','Machine Learning (scikit-learn, XGBoost)','Marketing Mix Modeling','SQL nâng cao','Statistical analysis','Data storytelling'],tools:['Python ML stack','BigQuery / Databricks','dbt','Looker / Tableau','Apache Spark'],certs:['AWS / GCP Machine Learning Specialty','Coursera Machine Learning Specialization','Meridian (Google MMM tool)'],howto:['Nền tảng kỹ thuật mạnh (IT, data science) + chuyển sang marketing','Hoặc marketing analyst giỏi + học ML chuyên sâu 1–2 năm','Rất hiếm ở VN — mức lương cao và cơ hội tăng nhanh','Apply vào Grab, Shopee, MoMo, VNG — nơi data volume lớn nhất'],next:['Head of Data Science','VP Analytics','Chief Data Officer'],fit:{creative:10,analytical:98,social:20,strategic:65,technical:98}}
+]}
+]},
+
+{id:'pr2',cls:'t-pr2',icon:'🚀',name:'Product & Growth Marketing',desc:'GTM, product-led growth, lifecycle, influencer marketing',levels:[
+{label:'Specialist (2–4 năm)',lid:'mid',positions:[
+{title:'Product Marketing Manager (PMM)',salary:'20–45tr',tags:['GTM','Positioning','Messaging','Launch'],desc:'Đưa sản phẩm ra thị trường. Cầu nối giữa product, sales và marketing.',daily:['Xây dựng positioning và messaging cho sản phẩm','Phát triển go-to-market strategy cho sản phẩm mới','Tạo sales enablement materials (deck, battlecard, case study)','Nghiên cứu competitor và market landscape','Đo lường launch success metrics'],skills:['Product positioning','Go-to-market strategy','Competitive analysis','Sales enablement','Customer research','Messaging framework'],tools:['Figma (review mockup)','Productboard / Aha! (roadmap)','Airtable (launch tracking)','HubSpot (sales content)','Userinterviews.com (research)'],certs:['Pragmatic Institute PMM Certification','Product Marketing Alliance courses','Reforge Product Marketing'],howto:['Nền tảng tốt nhất: brand marketing hoặc product management rồi chuyển sang','Học cách viết positioning statement và messaging document','Apply vào SaaS B2B, tech company, fintech — ngành này dùng PMM nhiều nhất','Portfolio: case study một product launch bạn đã tham gia'],next:['Senior PMM','Group PMM','VP Product Marketing','CMO (tech company)'],fit:{creative:60,analytical:65,social:55,strategic:85,technical:50}},
+{title:'Lifecycle Marketing Manager',salary:'18–35tr',tags:['Onboarding','Retention','Churn','Upsell'],desc:'Tối ưu hành trình của user từ activation đến retention và expansion.',daily:['Thiết kế và tối ưu onboarding flow','Xây dựng chương trình retention và loyalty','Phát triển upsell/cross-sell campaign','Phân tích cohort và churn reason','Cá nhân hóa communication theo segment và hành vi'],skills:['Customer lifecycle strategy','Behavioral segmentation','Marketing automation nâng cao','Data analysis','A/B testing','Cross-channel orchestration'],tools:['Braze / Iterable / Klaviyo','Amplitude / Mixpanel','SQL','Looker / Tableau','Intercom (in-app messaging)'],certs:['Braze Certification','Reforge Retention & Engagement','CXL Lifecycle Marketing'],howto:['2–3 năm làm email/CRM marketing rồi chuyển lên vị trí này','Phải biết đọc cohort analysis và retention curve thành thạo','Startup có retention problem luôn cần vị trí này'],next:['Head of Lifecycle Marketing','VP Customer Success Marketing'],fit:{creative:50,analytical:80,social:40,strategic:75,technical:65}},
+{title:'Influencer / KOL Marketing Manager',salary:'15–30tr',tags:['KOL','KOC','UGC','Creator economy'],desc:'Quản lý và tối ưu chiến lược influencer marketing. Từ mega KOL đến micro-influencer network.',daily:['Identify và vetting influencer phù hợp với brand','Đàm phán và quản lý hợp đồng KOL','Brief và review content của influencer','Đo lường hiệu quả: reach, engagement, EMV, conversion','Xây dựng KOC network cho brand'],skills:['Influencer identification & vetting','Contract negotiation','Content briefing','Campaign measurement','Relationship management','Trend forecasting'],tools:['Partipost / Kolsquare / Klear','TikTok Creator Marketplace','Meta Brand Collabs Manager','SocialBlade','Buzzsumo'],certs:['TikTok Marketing Science Certification'],howto:['Xây dựng mối quan hệ với influencer trước khi vào vị trí này','Biết phân biệt macro/micro/nano influencer và khi nào dùng gì','FMCG, beauty, F&B, fashion là ngành tuyển nhiều nhất'],next:['Head of Influencer Marketing','Creator Partnerships Lead','Social Media Director'],fit:{creative:65,analytical:55,social:90,strategic:60,technical:25}}
+]},
+{label:'Manager / Lead (4+ năm)',lid:'senior',positions:[
+{title:'Head of Growth / Growth Director',salary:'45–80tr',tags:['Growth strategy','Experimentation','North Star','Team lead'],desc:'Dẫn dắt toàn bộ chiến lược tăng trưởng công ty. Từ acquisition đến retention và monetization.',daily:['Đặt North Star Metric và OKR cho toàn growth team','Review experimentation roadmap hàng tuần','Phối hợp C-level về growth strategy','Quản lý growth team (analyst, marketer, engineer)','Báo cáo growth KPIs cho board'],skills:['Growth strategy','Cross-functional leadership','Data-driven decision making','Experimentation at scale','Product sense'],tools:['Amplitude / Mixpanel (org-wide)','SQL + Python','Looker / Tableau (board-level)','Full marketing stack'],certs:[],howto:['6+ năm trong growth/marketing với track record rõ ràng','Cần chứng minh: "growth team của tôi đưa DAU/revenue từ X lên Y trong Z tháng"','Mạng lưới startup ecosystem VN giúp land vị trí này nhiều hơn JD'],next:['CMO','VP Product','Co-founder','Startup founder'],fit:{creative:40,analytical:90,social:60,strategic:95,technical:70}}
+]}
+]},
+
+{id:'ag',cls:'t-ag',icon:'🏢',name:'Agency & Creative',desc:'Account, planning, art direction, copywriting, media buying',levels:[
+{label:'Intern / Fresher',lid:'entry',positions:[
+{title:'Account Executive (Agency)',salary:'7–13tr',tags:['Client service','Briefing','Timeline','Coordination'],desc:'Cầu nối giữa client và agency. Quản lý dự án, đảm bảo deliverable đúng hạn và đúng brief.',daily:['Nhận brief từ client và phân tích yêu cầu','Truyền đạt brief cho creative, media, production team','Theo dõi tiến độ và đảm bảo deadline','Trình bày kết quả và báo cáo cho client','Hỗ trợ senior account trong pitching'],skills:['Client communication','Project management','Brief writing','Time management','Presentation skills','Problem solving nhanh'],tools:['PowerPoint (deck trình bày)','Asana / Trello (project tracking)','Excel (budget)','Email/Slack professional'],certs:['Google Project Management (Coursera)','HubSpot Client Management'],howto:['Agency là nơi học nhanh nhất — tiếp xúc nhiều client, nhiều ngành','Deadline liên tục = học nhanh, nhưng cũng burn out nhanh nếu không quản lý được','Apply agency mid-size: đủ lớn để có process, đủ nhỏ để bạn làm nhiều'],next:['Senior Account Executive','Account Manager','Strategic Planner','Brand Manager (in-house)'],fit:{creative:50,analytical:45,social:85,strategic:50,technical:20}},
+{title:'Creative Intern / Junior Creative',salary:'5–10tr',tags:['Concept','Art direction','Copywriting','Design'],desc:'Phát triển ý tưởng sáng tạo cho campaign. Kết hợp visual và ngôn ngữ để truyền tải thông điệp.',daily:['Brainstorm concept cho campaign brief','Phát triển tagline, copy, key visual','Làm mock-up trình bày ý tưởng','Phối hợp với art director và copywriter senior','Tham gia creative meeting và presentation cho client'],skills:['Creative concept thinking','Art direction cơ bản','Copywriting','Adobe Creative Suite','Presentation skills','Brand understanding'],tools:['Adobe Photoshop / Illustrator','Figma','Canva','PowerPoint (creative deck)','Pinterest / Behance (inspiration)'],certs:['Adobe Certified Professional','D&AD New Blood (cuộc thi quan trọng)'],howto:['Portfolio là tất cả — không có bằng cấp nào thay thế được portfolio tốt','Tham gia D&AD New Blood, Cannes Young Lions Vietnam để xây tên tuổi','Ogilvy, Leo Burnett — agency này training creative bài bản nhất','Chuẩn bị nói về quá trình suy nghĩ tạo ra mỗi concept trong portfolio'],next:['Art Director','Senior Copywriter','Creative Director'],fit:{creative:95,analytical:25,social:60,strategic:55,technical:50}}
+]},
+{label:'Specialist (2–4 năm)',lid:'mid',positions:[
+{title:'Strategic Planner / Brand Planner',salary:'15–28tr',tags:['Consumer insight','Strategy','Research','Creative brief'],desc:'Nghiên cứu sâu consumer insight để tìm chiến lược truyền thông độc đáo cho brand.',daily:['Nghiên cứu và phân tích consumer insight','Phát triển communication strategy cho brand','Viết creative brief chất lượng cao','Lên framework cho chiến dịch dài hạn','Tham gia pitch mang tính chiến lược cao'],skills:['Consumer research','Strategic thinking','Insight mining','Creative brief writing','Presentation nâng cao','Cultural analysis'],tools:['GWI / Euromonitor (research)','Social listening tools','Qualitative research software','Nielsen data','PowerPoint (strategy deck)'],certs:['APG Planning Bootcamp','IPA Excellence Diploma'],howto:['Đây là vị trí hiếm và được trọng vọng nhất trong agency','Cần bằng chứng tư duy sắc bén: viết essay insight hay, thắng cuộc thi chiến lược','Ogilvy Consulting, Leo Burnett Strategy department đào tạo tốt nhất','Nhiều CMO xuất thân từ Strategic Planner'],next:['Head of Strategy','Chief Strategy Officer','Strategic Consulting','CMO (in-house)'],fit:{creative:75,analytical:70,social:60,strategic:95,technical:25}},
+{title:'Media Planner / Buyer',salary:'13–25tr',tags:['Media plan','GRP','TV/Digital','Media buying'],desc:'Lên kế hoạch và mua media placement tối ưu để thông điệp đến đúng người, đúng thời điểm.',daily:['Xây dựng media plan theo brief và budget','Negotiation mua media với đài TV, báo, OOH, digital','Tối ưu media mix dựa trên reach và frequency','Theo dõi campaign delivery và booking','Reconcile media spend và báo cáo cho client'],skills:['Media planning','Media buying & negotiation','GRP / TRP calculation','Cross-media planning','Data analysis (media metrics)','Vendor management'],tools:['Nielsen Media Research','Kantar Media','DV360 (programmatic)','Excel (media plan)','Prisma (media management)'],certs:['DV360 / Campaign Manager Certification','IAB Digital Media Planning Certificate'],howto:['Media agency (Mindshare, GroupM, Initiative, Dentsu Media) là nơi học tốt nhất','Cần hiểu cả traditional (TV, radio, OOH) và digital media','Kỹ năng đàm phán và quan hệ với media vendors rất quan trọng','Số liệu và Excel thành thạo là điều kiện tiên quyết'],next:['Media Manager','Head of Media','Investment Director','CMO'],fit:{creative:35,analytical:70,social:65,strategic:65,technical:50}},
+{title:'Art Director',salary:'15–30tr',tags:['Visual concept','Design direction','Campaign visual','Brand identity'],desc:'Dẫn dắt hướng hình ảnh cho campaign và thương hiệu. Kết hợp tư duy chiến lược và thẩm mỹ.',daily:['Phát triển visual concept cho campaign','Chỉ đạo mỹ thuật cho photoshoot, video','Review và feedback cho designer, photographer','Đảm bảo brand consistency trong mọi touchpoint','Trình bày concept cho client và nhận feedback'],skills:['Visual concept thinking','Design direction','Adobe Creative Suite nâng cao','Typography','Photography direction','Brand identity'],tools:['Adobe Photoshop / Illustrator / InDesign','Figma','After Effects','Behance (portfolio)','Pinterest (mood board)'],certs:['ADC (Art Directors Club) portfolio review','D&AD Wood Pencil và trên'],howto:['Portfolio mạnh là tất cả — thể hiện tư duy concept, không chỉ đẹp','Mỗi công việc trong portfolio cần có brief → concept → execution','Tham gia D&AD, Cannes Lions, One Show để so sánh với thế giới','Agency big 4 (Ogilvy, JWT, BBDO, Leo Burnett) đào tạo AD tốt nhất'],next:['Senior Art Director','Creative Director','Executive Creative Director'],fit:{creative:95,analytical:30,social:55,strategic:60,technical:65}}
+]},
+{label:'Manager / Lead (4+ năm)',lid:'senior',positions:[
+{title:'Creative Director',salary:'40–80tr',tags:['Creative leadership','Campaign concept','Team','Award'],desc:'Dẫn dắt hướng sáng tạo toàn bộ agency hoặc brand. Phát triển talent và văn hóa sáng tạo.',daily:['Đặt vision sáng tạo cho agency/brand','Lead pitch cho client lớn','Phát triển và mentor creative team','Review mọi output sáng tạo của team','Speak tại industry events (Cannes Lions, Spikes Asia)'],skills:['Creative leadership','Vision setting','Talent development','Client relationship','Industry reputation building'],tools:['Full creative software stack','Presentation excellence'],certs:['Cannes Lions juror','One Show juror (uy tín cao)'],howto:['10+ năm kinh nghiệm creative, với ít nhất 5 năm ở senior level','Award track record: Cannes, One Show, D&AD, Effie là gần như bắt buộc','Reputation trong industry quan trọng hơn bằng cấp','Nhiều ECD bắt đầu từ copywriter hoặc art director'],next:['Chief Creative Officer','Chief Marketing Officer','Agency Founder / Partner'],fit:{creative:98,analytical:35,social:70,strategic:80,technical:40}},
+{title:'Account / Client Service Manager',salary:'25–55tr',tags:['Client relationship','Revenue growth','Team management'],desc:'Quản lý và phát triển quan hệ khách hàng chiến lược. Mở rộng business từ client hiện tại.',daily:['Quản lý portfolio client với revenue responsibility','Phát triển quan hệ C-level tại client side','Quản lý account team và đảm bảo service quality','Lead business review hàng quý với client','Identify cơ hội upsell và mở rộng scope'],skills:['C-level client relationship','Revenue management','Team leadership','Strategic consulting','Pitch & presentation','Conflict resolution'],tools:['Salesforce CRM','PowerPoint (QBR deck)','Project management tools'],certs:['Sandler Sales Training','CIM Senior Marketing Qualification'],howto:['5+ năm agency experience với exposure đến nhiều loại client','Track record: "Tôi đã grow account X từ Y lên Z trong N năm"','Kỹ năng kinh doanh (upsell) quan trọng không kém kỹ năng service'],next:['Managing Director','CEO Agency','Business Development Director'],fit:{creative:45,analytical:55,social:90,strategic:75,technical:20}}
+]}
+]},
+
+{id:'pr',cls:'t-pr',icon:'📣',name:'PR & Communications',desc:'Quan hệ báo chí, danh tiếng, khủng hoảng, truyền thông nội bộ',levels:[
+{label:'Intern / Fresher',lid:'entry',positions:[
+{title:'PR Executive / Communications Executive',salary:'7–14tr',tags:['Media relations','Press release','Event PR','Crisis monitor'],desc:'Quản lý quan hệ báo chí và truyền thông. Viết thông cáo báo chí và tổ chức họp báo.',daily:['Viết thông cáo báo chí và pitching story đến nhà báo','Theo dõi media coverage và sentiment hàng ngày','Tổ chức họp báo, media trip, press conference','Quản lý media list và quan hệ với phóng viên','Báo cáo AVE (advertising value equivalent)'],skills:['Viết lách chuyên nghiệp','Media relations','Press release writing','Event organization','Crisis monitoring','Tiếng Anh tốt (nếu làm MNC)'],tools:['Meltwater / Mention (media monitoring)','Cision (media contact database)','Google Alerts (free)','PR Newswire / Vietnam Newswire'],certs:['PRSA Foundation (global standard)','CIPR (Chartered Institute of PR)'],howto:['PR agency (Weber Shandwick, Edelman, Ogilvy PR) là nơi học tốt nhất','Cần xây mạng lưới báo chí từ sớm — PR chạy bằng quan hệ','Viết tiếng Việt xuất sắc là bắt buộc; tiếng Anh là lợi thế lớn','Theo dõi VietnamNet, Vnexpress, Thanh Niên — hiểu cách báo đưa tin'],next:['PR Manager','Corporate Communications Manager','Social Media Manager'],fit:{creative:60,analytical:40,social:90,strategic:50,technical:20}}
+]},
+{label:'Specialist / Manager (2–5 năm)',lid:'mid',positions:[
+{title:'PR Manager / Communications Manager',salary:'20–40tr',tags:['Reputation management','Crisis PR','Corporate narrative','Media strategy'],desc:'Xây dựng và bảo vệ danh tiếng công ty. Quản lý khủng hoảng truyền thông khi xảy ra.',daily:['Phát triển corporate communications strategy','Quản lý khủng hoảng truyền thông và plan response','Brief và quản lý PR agency','Lên thông điệp chủ chốt cho C-level spokesperson','Quản lý CSR communications'],skills:['Reputation management','Crisis PR','Corporate storytelling','Executive communications','Issues management','Media strategy'],tools:['Meltwater / Cision Enterprise','Social listening advanced','Media analytics platforms'],certs:['APR (Accredited in Public Relations)','CIPR Diploma','Chartered PR Practitioner'],howto:['3+ năm PR experience với ít nhất 1 crisis management case study','Cần chứng minh: đã xử lý được ít nhất 1 khủng hoảng truyền thông','Mạng lưới báo chí rộng và chất lượng là tài sản quan trọng nhất','Tập đoàn lớn, ngân hàng, FMCG tuyển vị trí này với lương rất tốt'],next:['Head of Communications','VP Corporate Affairs','Chief Communications Officer'],fit:{creative:55,analytical:50,social:90,strategic:75,technical:20}},
+{title:'Internal Communications Specialist',salary:'14–25tr',tags:['Employee comms','Employer brand','Culture','Intranet'],desc:'Quản lý truyền thông nội bộ và xây dựng employer branding để thu hút và giữ nhân tài.',daily:['Viết và phân phối company newsletter, announcement','Quản lý intranet và nội dung nội bộ','Phát triển employer branding campaign','Phối hợp với HR về employee experience communications','Tổ chức town hall, all-hands meeting communications'],skills:['Internal communications','Employer branding','Employee engagement','Content creation','Event organization','HR collaboration'],tools:['Workplace by Meta / Slack','SharePoint / Confluence','Canva','Survey tools'],certs:['CIPR Internal Communications Diploma'],howto:['Phù hợp người thích comms nhưng muốn môi trường ổn định hơn agency','Hay được tuyển bởi người từ HR hoặc PR background','Công ty lớn (500+ người) mới có vị trí này'],next:['Head of Internal Comms','Chief People Officer','HR Director'],fit:{creative:55,analytical:40,social:85,strategic:55,technical:25}}
+]}
+]},
+
+{id:'ex',cls:'t-ex',icon:'👑',name:'Marketing Leadership',desc:'Marketing Manager → Director → CMO — lộ trình C-level',levels:[
+{label:'Manager (4–8 năm)',lid:'senior',positions:[
+{title:'Marketing Manager (General)',salary:'30–55tr',tags:['360 marketing','Team lead','Budget','Cross-functional'],desc:'Dẫn dắt team marketing toàn diện. Quản lý tất cả kênh và báo cáo thẳng lên CMO/Director.',daily:['Lập và quản lý marketing budget toàn bộ','Dẫn dắt team 5–15 người với diverse expertise','Phê duyệt mọi campaign và strategy','Báo cáo marketing KPI cho C-level monthly','Align với sales, product, operations về go-to-market'],skills:['General marketing expertise','People management','Budget management','Strategic planning','Cross-functional leadership','Data-driven decision making'],tools:['Full marketing stack','BI tools','Project management','CRM / ERP (đọc)'],certs:['MBA (lợi thế rất lớn)','CIM Chartered Marketer'],howto:['4–6 năm kinh nghiệm trong ngành + 1–2 năm đã lead project/team nhỏ','Phải có tư duy kinh doanh rộng hơn chỉ marketing','Xây mạng lưới từ sớm — nhiều vị trí manager filled qua referral'],next:['Marketing Director','CMO','VP Marketing','General Manager'],fit:{creative:55,analytical:70,social:70,strategic:85,technical:45}},
+{title:'Marketing Director / VP Marketing',salary:'60–120tr',tags:['Marketing strategy','Executive','P&L','Board reporting'],desc:'Xây dựng và thực thi chiến lược marketing toàn công ty. Thành viên ban lãnh đạo.',daily:['Đặt marketing strategy và vision 1–3 năm','Quản lý multiple team manager (digital, brand, comms)','Báo cáo cho CEO/Board về marketing performance','Phối hợp C-suite về business strategy','Phê duyệt agency contracts và major campaigns'],skills:['Marketing strategy','Executive leadership','Board communication','P&L ownership','Talent development','Market vision'],tools:['Executive dashboard (Tableau/Looker)','Board presentation tools','Full marketing intelligence stack'],certs:['MBA từ top school','Fellow of CIM'],howto:['8–12 năm kinh nghiệm marketing với ít nhất 3–4 năm ở manager level','Track record: "marketing của tôi đã đóng góp X% revenue growth"','MBA từ trường uy tín hoặc executive education programs giúp rất nhiều','Xây dựng personal brand mạnh — speaking, writing, industry recognition'],next:['CMO','CEO','Board Director','Startup Founder'],fit:{creative:50,analytical:70,social:75,strategic:95,technical:40}}
+]},
+{label:'C-Level (8+ năm)',lid:'clevel',positions:[
+{title:'Chief Marketing Officer (CMO)',salary:'120–300tr+',tags:['C-suite','P&L','Board','Company growth'],desc:'Lãnh đạo marketing cao nhất của tổ chức. Đồng trách nhiệm với CEO về tăng trưởng kinh doanh.',daily:['Đặt tầm nhìn marketing cho công ty','Tham gia board meeting và báo cáo investor','Quản lý Head of mọi lĩnh vực marketing','Đại diện công ty trên mọi mặt trận truyền thông','Dẫn dắt các quyết định chiến lược lớn'],skills:['Full marketing mastery','C-suite leadership','Investor communication','Organizational design','Brand vision','Business ownership mindset'],tools:['Executive intelligence stack','Board reporting tools','Competitive intelligence platforms'],certs:['MBA (Harvard/Wharton/INSEAD level ideal)','CMO Leadership programs (Kellogg, ANA)'],howto:['15+ năm kinh nghiệm marketing với 5+ năm ở VP/Director level','Đây là đỉnh của kim tự tháp — cần kết hợp mọi kỹ năng và kinh nghiệm','Personal brand cực kỳ mạnh trong industry là gần như bắt buộc','Tham gia mạng lưới CMO Vietnam, Marketing Association'],next:['CEO','Board Director','Executive Chair','Marketing Investor/Advisor','Entrepreneur'],fit:{creative:65,analytical:75,social:80,strategic:99,technical:45}}
+]}
+]}
+];
+
+const FILTERS=[
+{id:'all',label:'Tất cả'},{sep:1},
+{id:'d',label:'📊 Digital'},{id:'co',label:'✍️ Content'},{id:'br',label:'🏷️ Brand'},{id:'da',label:'📈 Data'},{id:'pr2',label:'🚀 Product'},{id:'ag',label:'🏢 Agency'},{id:'pr',label:'📣 PR'},{id:'ex',label:'👑 Leadership'},
+{sep:1},
+{id:'entry',label:'Intern/Fresher'},{id:'mid',label:'Specialist'},{id:'senior',label:'Manager+'}
+];
+
+let af='all';
+const trackIds=DATA.map(t=>t.id);
+const levelIds=['entry','mid','senior','clevel'];
+
+function buildFilters(){
+  const bar=document.getElementById('fbar');
+  bar.innerHTML='<span class="flabel">Lọc:</span>';
+  FILTERS.forEach(f=>{
+    if(f.sep){const s=document.createElement('span');s.className='fsep';bar.appendChild(s);return;}
+    const b=document.createElement('button');
+    b.className='fbtn'+(f.id==='all'?' on':'');
+    b.textContent=f.label;b.onclick=()=>setFilter(f.id,b);bar.appendChild(b);
+  });
+}
+
+function setFilter(id,btn){
+  af=id;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+  document.querySelectorAll('.track').forEach(tr=>{
+    tr.classList.toggle('dim',trackIds.includes(id)&&tr.dataset.id!==id);
+  });
+  document.querySelectorAll('.lvlrow').forEach(r=>{
+    r.classList.toggle('hide',levelIds.includes(id)&&r.dataset.lid!==id);
+  });
+}
+
+function buildTracks(){
+  const wrap=document.getElementById('bodyWrap');
+  DATA.forEach(track=>{
+    const total=track.levels.reduce((s,l)=>s+l.positions.length,0);
+    const tr=document.createElement('div');
+    tr.className='track '+track.cls;tr.dataset.id=track.id;
+    const thead=document.createElement('div');thead.className='thead';
+    thead.innerHTML=`<span class="ticon">${track.icon}</span><div class="tmeta"><div class="tname">${track.name}</div><div class="tdesc">${track.desc}</div></div><span class="tcnt">${total} vị trí</span><span class="tchev">▼</span>`;
+    thead.onclick=()=>tr.classList.toggle('closed');tr.appendChild(thead);
+    const tbody=document.createElement('div');tbody.className='tbody';
+    track.levels.forEach(level=>{
+      const row=document.createElement('div');row.className='lvlrow';row.dataset.lid=level.lid;
+      const lc=document.createElement('div');lc.className='llabel';lc.innerHTML=`<span class="ltxt">${level.label}</span>`;
+      const cards=document.createElement('div');cards.className='lcards';
+      level.positions.forEach(pos=>{
+        const c=document.createElement('div');c.className='card';
+        c.innerHTML=`<div class="ctop"><div class="ctitle">${pos.title}</div><div class="csalary">💰 ${pos.salary}/tháng</div></div><div class="cbot">${pos.tags.slice(0,3).map(t=>`<span class="ctag">${t}</span>`).join('')}</div>`;
+        c.onclick=()=>openModal(pos);cards.appendChild(c);
+      });
+      row.appendChild(lc);row.appendChild(cards);tbody.appendChild(row);
+    });
+    tr.appendChild(tbody);wrap.appendChild(tr);
+  });
+  const tip=document.createElement('div');tip.className='tip';
+  tip.innerHTML='<strong>Lời khuyên cho bạn — sinh viên mới ra trường:</strong> Đừng cố chọn "con đường đúng nhất" ngay từ đầu. Hãy chọn vị trí giúp bạn <strong>học nhanh nhất trong 1–2 năm đầu</strong>. Agency và startup thường là lựa chọn tốt vì bạn tiếp xúc nhiều kênh, nhiều ngành, nhiều tình huống thực tế. Sau đó, khi đã biết mình giỏi gì và thích gì, hãy chuyên sâu và thăng tiến trong ngách đó. Marketing là ngành <strong>càng làm nhiều càng giỏi</strong> — hành động sớm quan trọng hơn chuẩn bị hoàn hảo.';
+  wrap.appendChild(tip);
+}
+
+function openModal(pos){
+  document.getElementById('modalTitle').textContent=pos.title;
+  const fitHTML=Object.entries(pos.fit).map(([k,v])=>`<div class="fitrow"><span class="fitkey">${FL[k]}</span><div class="fitwrap"><div class="fitfill" style="width:${v}%;background:${FC[k]}"></div></div><span class="fitpct">${v}%</span></div>`).join('');
+  document.getElementById('modalBody').innerHTML=`
+    <div class="mh">${pos.title}</div>
+    <div class="mdesc">${pos.desc}</div>
+    <div class="mbadges"><span class="mbadge">💰 ${pos.salary}/tháng</span>${pos.tags.map(t=>`<span class="mbadge">${t}</span>`).join('')}</div>
+    <div class="fitbar"><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:11px">Yêu cầu tố chất</div>${fitHTML}</div>
+    <div class="msec"><div class="mstitle">Công việc hàng ngày</div><ul class="mlist">${pos.daily.map(d=>`<li>${d}</li>`).join('')}</ul></div>
+    <div class="mgrid">
+      <div class="mbox"><div class="mboxt">Kỹ năng cần có</div><ul class="mlist">${pos.skills.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      <div class="mbox"><div class="mboxt">Công cụ & nền tảng</div><ul class="mlist">${pos.tools.map(t=>`<li>${t}</li>`).join('')}</ul></div>
+    </div>
+    ${pos.certs.length?`<div class="msec"><div class="mstitle">Chứng chỉ nên có</div><div class="mtags">${pos.certs.map(c=>`<span class="mtag">🎓 ${c}</span>`).join('')}</div></div>`:''}
+    <div class="msec"><div class="mstitle">Cách bắt đầu & ứng tuyển</div><ul class="mlist">${pos.howto.map(h=>`<li>${h}</li>`).join('')}</ul></div>
+    <div class="msec"><div class="mstitle">Bước tiếp theo sau vị trí này</div><div class="mnext">${pos.next.map(n=>`<span class="mnextitem">→ ${n}</span>`).join('')}</div></div>`;
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
+document.getElementById('overlay').onclick=e=>{if(e.target===document.getElementById('overlay'))closeModal();};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+buildFilters();buildTracks();
+</script>
+</body>
+</html>
